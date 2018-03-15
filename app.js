@@ -21,14 +21,16 @@ request({
 	url: `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=${GOOGLE_MAPS_KEY}`,
 	json: true
 }, (error, response, body) => {
-	if (!error) {
-		console.log('Error with Google address');
-		return;
-	}
-	const {
-		formatted_address,
-		geometry
-	} = body.results[0];
+	if (error) {
+		console.log('Unable to connect with Google server');
+	} else if (body.status === 'ZERO_RESULTS') {
+		consoel.log('Unable to find that adress');
+	} else if (body.status === 'OK') {
+		const {
+			formatted_address,
+			geometry
+		} = body.results[0];
 
-	console.log(`Address : ${formatted_address} \nLattitude : ${geometry.location.lat}, \nLongitude : ${geometry.location.lng}`);
+		console.log(`Address : ${formatted_address} \nLattitude : ${geometry.location.lat}, \nLongitude : ${geometry.location.lng}`);
+	}
 });
