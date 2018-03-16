@@ -1,5 +1,4 @@
 const request = require('request');
-const axios = require('axios');
 const GOOGLE_MAPS_KEY = 'AIzaSyDtwq31X33G-bMpcmdzOp49GrNV195pvBM';
 
 const geocodeAddress = (address, callback) => {
@@ -21,7 +20,7 @@ const geocodeAddress = (address, callback) => {
 			const geocodedAddress = {
 				address: formatted_address,
 				latitude: geometry.location.lat,
-                    longitude: geometry.location.lng
+				longitude: geometry.location.lng
 			};
 
 			callback(undefined, geocodedAddress);
@@ -46,12 +45,12 @@ const geocodeAddressPromise = (address) => {
 					formatted_address,
 					geometry
 				} = body.results[0];
-
 				const geocodedAddress = {
 					address: formatted_address,
 					latitude: geometry.location.lat,
-	                    longitude: geometry.location.lng
+					longitude: geometry.location.lng
 				};
+
 				resolve(geocodedAddress);
 			}
 		});
